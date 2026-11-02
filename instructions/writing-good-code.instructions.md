@@ -1,52 +1,55 @@
 ---
 name: "Writing Good Code"
-description: "Important notes on writing good, succinct code, with the big picture in mind."
+description: "Use when planning, implementing, debugging, testing, or refactoring code. Favor explicit assumptions, simple designs, focused changes, and verified outcomes."
 ---
 
-## Intro
+# Writing good code
 
-When writing code, it's imperative to keep in mind the bigger picture.
-This means writing code with *longevity*, a.k.a. "future-proof" code.
-An important concept is that features almost always grow both *vertically* and *laterally*.
+## Understand before changing
 
-Further, new features should also take stock of not only the *state* but the *spirit* of existing code.
-A feature almost never exists in isolation, and it's important to think "how can this integrate in the best way with what is currently in place".
-Of course, good practice also means refactoring existing for the new intention.
+- Read the relevant implementation, tests, and project documentation first. Find
+  existing helpers and conventions before adding another implementation.
+- State consequential assumptions. Ask when different interpretations would
+  change behavior, scope, or architecture; do not silently choose for the user.
+- Explain meaningful tradeoffs and suggest a simpler approach when appropriate.
+  Keep the process proportionate: an obvious typo does not need a design review.
 
-Finally, housekeeping and maintenance of existing pieces during an upgrade should not be neglected.
+## Solve today's problem simply
 
-## Writing Generically for lateral and vertical growth
+- Implement the requested behavior completely, without speculative features,
+  configuration, dependencies, inheritance, or extension points.
+- Reuse an existing abstraction when it fits. Introduce a new one only when
+  current requirements justify it, not to anticipate hypothetical growth.
+- Preserve type safety and established error handling. Do not mask failures with
+  broad catches, silent defaults, or success-shaped responses.
 
-Good code has a solid foundation.
-This means writing generically to plan for the future.
-Often, consider if a feature deserves **base classes**, and it often will.
+## Keep changes surgical
 
-### No blinders--Keep your head up
+- Match the surrounding style and preserve unrelated user changes.
+- Refactor only what the requested behavior requires. Do not reformat adjacent
+  code or remove unrelated pre-existing dead code.
+- Remove imports, helpers, and documentation made obsolete by this change.
+- Consider all affected callers and interfaces, not just the first failing path.
+  Call out intentional compatibility changes and their migration implications.
 
-It's imperative to not wear blinders while coding.
-Don't get tunnel-vision on the task, **always consider the big picture**.
+## Make success observable
 
-## Understand the repo
+- For non-trivial work, give a short plan with a concrete check for each outcome.
+- For a bug fix, reproduce the failure with a focused regression test when
+  feasible; for new behavior, test the contract and meaningful failure cases.
+- Run the smallest relevant existing tests, type checks, lint, or build. Broaden
+  validation when shared behavior or targeted failures warrant it.
+- Verify the actual requirement, not merely a proxy such as compilation.
+  For UI changes, inspect the affected interaction when tools are available.
+- Review the final diff for unintended changes and unnecessary complexity.
+  Report commands, outcomes, and remaining gaps; never imply an unrun check passed.
 
-To write good, future-proof code, requires a **deep understanding of the repo and its direction**.
+## Share durable context
 
-- Consult the repos `docs/` for general and specific relevant information
-
-### Discuss with the user before making big decisions
-
-Discussing with the user can help orient you better before making big moves.
-Also, don't be shy and be transparent about your ideas.
-
-## Less is More
-
-Good code is succinct.
-Language models and agents have a tendency to be quite verbose.
-Sometimes **less is more**:
-
-- A sprawling codebase is corrosive and linearly makes things less manageable, especially when collaborating.
-- Check your **eagerness to write additive code**.
-- Ask yourself:
-  - "Do I really need to write ten different functions here?"
-  - "Is there a better way to do this with e.g. a **base class**?"
-  - "Is this **overlapping with existing functionality**? And if so, should I instead just refactor or optimize what exists?"
-  - "Can this be achieved with some smart **refactoring**?"
+- Update affected documentation in the same change. Record architectural
+  decisions when they create meaningful constraints or tradeoffs.
+- Explain unfamiliar code by tracing a bounded slice of the current
+  implementation, citing evidence rather than inventing a system-wide model.
+- When a review repeatedly finds the same issue, propose a focused test, lint
+  rule, or short instruction at the source. Do not turn every observation into
+  permanent policy or change team-wide rules without agreement.

@@ -1,12 +1,16 @@
 ---
 name: 'Comments and Doc Strings'
-description: 'When writing doc strings and comments'
+description: 'Use when adding or editing code comments, docstrings, or public API reference. Explain contracts and non-obvious intent without narrating the implementation.'
 ---
 
 ## Writing comments and doc strings
 
-- Use doc-strings and comments sparingly
-- Keep them brief and avoid using tons of caveats and disclaimers
+- Comment non-obvious intent, invariants, constraints, or surprising tradeoffs.
+  Do not narrate self-explanatory code.
+- Document public API contracts using the project's existing convention:
+  meaningful inputs, outputs, errors, side effects, and examples where helpful.
+  "Sparse comments" is not a reason to omit necessary API documentation.
+- Keep prose brief and accurate; update it when behavior changes.
 
 ### Avoid hysteresis
 
