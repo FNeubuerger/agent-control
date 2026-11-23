@@ -41,6 +41,12 @@ description: "Use when planning, implementing, debugging, testing, or refactorin
   validation when shared behavior or targeted failures warrant it.
 - Verify the actual requirement, not merely a proxy such as compilation.
   For UI changes, inspect the affected interaction when tools are available.
+- For critical invariants, consider a formal proof where its benefit justifies
+  the cost. [Bend](https://github.com/bendlang/bend) is one option; ask before
+  adding it or another new language or toolchain. If adopted, check the stated
+  properties and their assumptions, run the project's proof checks, and report
+  failures or gaps. A proof of a separate model does not by itself prove the
+  production implementation. Keep relevant tests and integration checks.
 - Review the final diff for unintended changes and unnecessary complexity.
   Report commands, outcomes, and remaining gaps; never imply an unrun check passed.
 

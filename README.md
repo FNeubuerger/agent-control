@@ -1,3 +1,4 @@
+
 # agent-control
 
 Resources to make your agent less stupid.
@@ -11,20 +12,24 @@ The [engineering defaults](./instructions/engineering-defaults.instructions.md) 
 assumptions, simple designs, focused changes, and observable verification.
 Detailed resources:
 
-| Resource | Purpose |
-|----------|---------|
-| [Writing good code](./instructions/writing-good-code.instructions.md) | Plan proportionately, avoid speculative abstractions, and verify behavior. |
-| [Writing docs](./instructions/writing-docs.instructions.md) | Maintain setup, usage, API contracts, architecture explanations, and consequential decision records. |
-| [Comments and doc strings](./instructions/comments-doc-strings.instructions.md) | Explain non-obvious intent and public contracts without narrating code. |
-| [Quality hooks](./instructions/quality-hooks.instructions.md) | Set up project-local pre-commit checks, including Ruff for Python, without replacing existing toolchains. |
-| [Explain code](./.github/skills/explain-code/SKILL.md) | Build shared understanding of a specific feature from current source evidence. |
-| [Review changes](./.github/skills/review-changes/SKILL.md) | Find actionable regressions, report verification evidence, and keep review rounds bounded. |
+| Resource                                                                       | Purpose                                                                                                   |
+| ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------- |
+| [Writing good code](./instructions/writing-good-code.instructions.md)           | Plan proportionately, avoid speculative abstractions, and verify behavior.                                |
+| [Writing docs](./instructions/writing-docs.instructions.md)                     | Maintain setup, usage, API contracts, architecture explanations, and consequential decision records.      |
+| [Comments and doc strings](./instructions/comments-doc-strings.instructions.md) | Explain non-obvious intent and public contracts without narrating code.                                   |
+| [Quality hooks](./instructions/quality-hooks.instructions.md)                   | Set up project-local pre-commit checks, including Ruff for Python, without replacing existing toolchains. |
+| [Explain code](./.github/skills/explain-code/SKILL.md)                          | Build shared understanding of a specific feature from current source evidence.                            |
+| [Review changes](./.github/skills/review-changes/SKILL.md)                      | Find actionable regressions, report verification evidence, and keep review rounds bounded.                |
 
 The coding practices are informed by
-[multica-ai's Karpathy-inspired guidelines](https://github.com/multica-ai/andrej-karpathy-skills).
+[multica-ai&#39;s Karpathy-inspired guidelines](https://github.com/multica-ai/andrej-karpathy-skills).
 The explanation and review workflows also draw on
-[Anthropic's code review and shared-context practices](https://claude.dev/blog/solving-code-review-at-anthropic/#sharing-context-across-the-team).
+[Anthropic&#39;s code review and shared-context practices](https://claude.dev/blog/solving-code-review-at-anthropic/#sharing-context-across-the-team).
 These are adapted workflows, not an installation of a Claude plugin.
+
+For suitable critical invariants, the testing guidance also considers
+[Bend](https://github.com/bendlang/bend) as an optional formal proof tool.
+Proofs complement tests; introducing a new language or toolchain requires agreement.
 
 ## Make these your Copilot defaults
 
@@ -51,13 +56,13 @@ The [installer](./scripts/Install-Defaults.ps1) uses directory junctions, which
 normally require neither administrator privileges nor Developer Mode.
 It does not copy policies into projects or change VS Code settings or Git hooks.
 
-| Installed location | Live source / purpose |
-|--------------------|-----------------------|
-| `~/.copilot/instructions/agent-control/` | Junction to this checkout's `instructions/`. |
-| `<VS Code user profile>/prompts/agent-control/` | Junction to the same instructions for the Local harness. |
-| `~/.copilot/skills/<skill>/` | Junction to each skill in this checkout's `.github/skills/`. |
-| `~/.agents/skills/<skill>/` | Junction to the same skills for Local sessions. |
-| `~/.copilot/copilot-instructions.md` | Small managed block linking the canonical baseline; unrelated personal instructions remain intact. |
+| Installed location                                | Live source / purpose                                                                              |
+| ------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `~/.copilot/instructions/agent-control/`        | Junction to this checkout's `instructions/`.                                                     |
+| `<VS Code user profile>/prompts/agent-control/` | Junction to the same instructions for the Local harness.                                           |
+| `~/.copilot/skills/<skill>/`                    | Junction to each skill in this checkout's `.github/skills/`.                                     |
+| `~/.agents/skills/<skill>/`                     | Junction to the same skills for Local sessions.                                                    |
+| `~/.copilot/copilot-instructions.md`            | Small managed block linking the canonical baseline; unrelated personal instructions remain intact. |
 
 The single policy source is
 [`instructions/engineering-defaults.instructions.md`](./instructions/engineering-defaults.instructions.md)
@@ -165,12 +170,12 @@ A Workspace scope applies to the project you're working on, and is thus relative
 
 Use the User scope to apply controls to all your projects using that harness.
 
-| Session and scope | Default file location |
-|-------------------|-----------------------|
-| Copilot workspace | `.github/instructions/` |
-| Claude workspace | `.claude/rules/` |
-| Copilot user | `~/.copilot/instructions/` |
-| Claude user | `~/.claude/rules/` |
+| Session and scope | Default file location        |
+| ----------------- | ---------------------------- |
+| Copilot workspace | `.github/instructions/`    |
+| Claude workspace  | `.claude/rules/`           |
+| Copilot user      | `~/.copilot/instructions/` |
+| Claude user       | `~/.claude/rules/`         |
 
 #### Always-on Instructions
 
@@ -180,12 +185,12 @@ instructions selected by file patterns or task relevance.
 See the [VS Code custom instructions documentation](https://code.visualstudio.com/docs/agent-customization/custom-instructions)
 and [Claude Code instructions documentation](https://code.claude.com/docs/en/memory).
 
-| Description | File location |
-|-------------|---------------|
+| Description                                                     | File location                          |
+| --------------------------------------------------------------- | -------------------------------------- |
 | Copilot user-level instructions that apply across repositories. | `~/.copilot/copilot-instructions.md` |
-| Copilot repository-wide instructions. | `.github/copilot-instructions.md` |
-| Claude user-level instructions that apply across repositories. | `~/.claude/CLAUDE.md` |
-| Claude repository-wide instructions. | `CLAUDE.md` or `.claude/CLAUDE.md` |
+| Copilot repository-wide instructions.                           | `.github/copilot-instructions.md`    |
+| Claude user-level instructions that apply across repositories.  | `~/.claude/CLAUDE.md`                |
+| Claude repository-wide instructions.                            | `CLAUDE.md` or `.claude/CLAUDE.md` |
 
 ### Filenaming
 
@@ -228,12 +233,12 @@ supporting files.
 As with instructions, workspace skills belong to a project, while user skills
 are available across projects.
 
-| Session and scope | Default file location |
-|-------------------|-----------------------|
-| Copilot workspace | `.github/skills/<skill-name>/SKILL.md` |
-| Claude workspace | `.claude/skills/<skill-name>/SKILL.md` |
-| Copilot user | `~/.copilot/skills/<skill-name>/SKILL.md` |
-| Claude user | `~/.claude/skills/<skill-name>/SKILL.md` |
+| Session and scope | Default file location                       |
+| ----------------- | ------------------------------------------- |
+| Copilot workspace | `.github/skills/<skill-name>/SKILL.md`    |
+| Claude workspace  | `.claude/skills/<skill-name>/SKILL.md`    |
+| Copilot user      | `~/.copilot/skills/<skill-name>/SKILL.md` |
+| Claude user       | `~/.claude/skills/<skill-name>/SKILL.md`  |
 
 VS Code's Local sessions also search `.claude/skills/` and `.agents/skills/`
 in the workspace, and `~/.claude/skills/` and `~/.agents/skills/` for user

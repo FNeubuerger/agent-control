@@ -15,6 +15,8 @@ applyTo: "**"
   pieces your change creates.
 - Define observable success, add focused regression or behavior tests, and run
   relevant existing checks. Report evidence and unverified gaps honestly.
+- For suitable critical invariants, consider formal proofs such as Bend as a
+  complement to tests; ask before introducing a new language or toolchain.
 - When setting up or substantially changing a code project, establish or maintain
   project-local pre-commit lint/format checks. For Python, prefer Ruff with
   pre-commit unless the project already uses an equivalent toolchain. Follow
